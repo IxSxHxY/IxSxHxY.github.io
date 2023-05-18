@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>About Us</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.min.js" defer></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="//unpkg.com/alpinejs" defer></script>
+
+    <link rel="stylesheet" href="index.css">
+
+    <script type="module" src="map.js"></script>
+
+    <script type="module" src="index.js" defer></script>
+
+</head>
+
+<body class="w-full bg-gray-300 h-screen">
+    <nav class="bg-white border-gray-200 dark:bg-gray-900">
+        <div class="w-full flex flex-wrap items-center justify-between p-4">
+            <a href="./index.html" class="flex items-center">
+                <img src="logo.png" class="h-8 mr-3" alt="Icon">
+                <!--<img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo" /> -->
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Air Quality
+                    Index</span>
+            </a>
+            <div
+                class="self-center text-center text-[20px] sm:text-xl lg:text-xl flex flex-wrap justify-center lg:flex-nowrap">
+                <a class=" text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold" href="/">
+                    World Map
+                </a>
+                <!-- <span class="text-white">|</span> -->
+                <a class="text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold "
+                    href="./station.html">
+                    Specific station
+                </a>
+                <!-- <span class="text-white">|</span> -->
+                <a class="text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold" href="./about.html">
+                    About us
+                </a>
+            </div>
+
+        </div>
+    </nav>
+    <div class="flex flex-wrap w-full p-5 border border-blue-500" x-data="{
+        data: [
+        {
+            section:'Our Vision',
+            content:`<p class='mb-2'>Our vision is to create a sustainable future that benefits both the environment and society. We believe that sustainability is essential for our well-being and the well-being of future generations, and we are committed to promoting sustainable practices and environmental awareness around the world.</p>
+
+                <p class='mb-2'>To achieve our vision, we are dedicated to creating a comprehensive platform that promotes sustainability and environmental awareness through education, advocacy, and community building. We strive to be a trusted source of information and resources for individuals, businesses, and policymakers, offering practical guidance and support to enable sustainable choices in daily life, business, and policy-making. We are committed to fostering a culture of sustainability and environmental stewardship that ensures a healthy planet and a better future for all.</p>`
+        },{
+            section:'Our Goal',
+            content:`<p class='mb-2'>Our goal is to make sustainable practices and environmental awareness a priority for everyone, regardless of their background or circumstances. We believe that education and accessibility are key to achieving this goal, and we are committed to providing practical guidance and support to help people integrate sustainable practices into their daily lives, businesses, and policy-making.</p>
+
+                <p class='mb-2'>To achieve our goal, we are dedicated to promoting sustainability and environmental awareness on a global scale. We believe that sustainability is a shared responsibility, and we are committed to working with others to create a more sustainable and equitable world for all. We believe that through education, advocacy, and community building, we can empower people to take action towards a sustainable future that benefits everyone.</p>`
+        }, {
+            section:'Our Mission',
+            content:`<p class='mb-2'>Our mission is to promote sustainability and environmental awareness by providing accessible and actionable information and resources to individuals, businesses, and policymakers. We believe that education, advocacy, and community building are essential tools for creating a sustainable future, and we are dedicated to empowering people to take action towards that future.</p>
+
+                <p class='mb-2'>To achieve our mission, we are committed to providing practical guidance and support to help people integrate sustainable practices into their daily lives, businesses, and policy-making. We strive to be a trusted source of information and resources, offering accessible and actionable guidance to individuals and organizations around the world. We believe that sustainability is a shared responsibility, and we are dedicated to working with others to create a more sustainable and equitable world for all. Our mission is to foster a culture of sustainability and environmental stewardship that ensures a healthy planet and a better future for generations to come.</p>`
+        }, {
+            section:'Our Values',
+            content:`<ul class='list-disc'>
+                <li class='mb-1'>Accessibility: We believe that sustainability should be accessible to all and that everyone should have the opportunity to make sustainable choices.</li>
+                <li class='mb-1'>Inclusivity and Diversity: We value inclusivity and diversity as essential components of building a sustainable future that works for everyone.</li>
+                <li class='mb-1'>Collaboration and Partnership: Collaboration and partnership are central to our approach, as we believe that working together is essential to create positive change.</li>
+                <li class='mb-1'>Integrity, Transparency, and Ethical Behavior: We hold ourselves to the highest standards of integrity, transparency, and ethical behavior, and we are committed to using our platform to promote environmental awareness and inspire action towards a better future for all.</li>
+            </ul>`
+        }
+        ],
+        fadeIn: false,
+        fadeOut: false,
+        currSection: 0,
+        display(i) {
+            if (this.fadeOut == true) return 
+            this.fadeOut = true
+            setTimeout(()=>{
+                this.fadeOut = false; 
+                this.currSection = i; 
+                this.fadeIn = true;
+                setTimeout(() => {
+                    this.fadeIn = false;
+                }, 250);
+            }, 250)
+            
+        },
+
+    }">
+        <div id="section" class="flex flex-col sm:flex-row  p-4 font-bold justify-around w-full">
+            <button @click.throttle.500ms="display(0)" :class="currSection == 0 ? 'text-blue-600 border-b border-b-blue-600 ':'' " class="hover:bg-blue-600 hover:text-white rounded-lg p-3">Our
+                Vision</button>
+            <button @click.throttle.500ms="display(1)" :class="currSection == 1 ? 'text-blue-600 border-b border-b-blue-600':'' " class="hover:bg-blue-600 hover:text-white rounded-lg p-3">Our Goal</button>
+            <button @click.throttle.500ms="display(2)" :class="currSection == 2 ? 'text-blue-600 border-b border-b-blue-600':'' " class="hover:bg-blue-600 hover:text-white rounded-lg p-3">Our Mission</button>
+            <button @click.throttle.500ms="display(3)" :class="currSection == 3 ? 'text-blue-600 border-b border-b-blue-600':'' " class="hover:bg-blue-600 hover:text-white rounded-lg p-3">Our Values</button>
+        </div>
+        <div id="sectionContent" class="w-full" >
+            <h1 :class="{'fade-out': fadeOut, 'fade-in': fadeIn}" class="text-center font-bold text-2xl" x-text="data[currSection].section" >Our Vision</h1>
+            <p :class="{'fade-out': fadeOut, 'fade-in': fadeIn}" class="text-[15px] sm:text-sm md:text-md lg:text-lg sm:p-4 md:p-6 lg:p-8 w-full"
+                x-html="data[currSection].content" >
+                We envision a future in which sustainability and environmental awareness are woven into the fabric
+                of society, with individuals and organizations around the world taking action to create a
+                sustainable and equitable world for all. We aspire to be a leading platform for promoting
+                sustainability and environmental awareness, inspiring individuals and organizations to take action
+                towards a more sustainable future. Our vision is a world where sustainability is the norm, and where
+                people from all walks of life are committed to preserving our planet for future generations.
+            </p>
+
+        </div>
+    </div>
+    <!-- <div id=" leaflet-locations">
+        </div> 
+        <!-- 
+    <div id="content" class="p-5 w-full h-[80%]">
+        <h1 class="font-bold text-4xl text-center">About Us</h1>
+        <div class="grid grid-cols-2 gap-3 md:gap-10">
+
+            <div class="text-black">
+                <h2 class="font-bold text-xl text-center">Our Vision</h2>
+                <p class="text-justify text-sm lg:text-md">
+                    We envision a future in which sustainability and environmental awareness are woven into the fabric
+                    of society, with individuals and organizations around the world taking action to create a
+                    sustainable and equitable world for all. We aspire to be a leading platform for promoting
+                    sustainability and environmental awareness, inspiring individuals and organizations to take action
+                    towards a more sustainable future. Our vision is a world where sustainability is the norm, and where
+                    people from all walks of life are committed to preserving our planet for future generations.
+                </p>
+
+            </div>
+            <div class="text-black">
+                <h2 class="font-bold text-xl text-center">Our Goal</h2>
+                <p class="text-justify text-sm md:text-md">
+                    Our goal is to promote a culture of sustainability and environmental stewardship that ensures a
+                    healthy planet and a better future for all. We believe that through education, advocacy, and
+                    community building, we can inspire and support individuals and organizations to make sustainable
+                    choices that benefit both the environment and society. We strive to provide actionable guidance and
+                    resources that promote sustainable practices in daily life, business, and policy-making.
+                </p>
+
+            </div>
+            <div class="text-black">
+
+                <h2 class="font-bold text-xl text-center">Our Mission</h2>
+
+                <p class="text-justify text-sm md:text-md">
+                    To promote sustainability and environmental awareness by providing accessible and actionable
+                    information and resources to individuals, businesses, and policymakers. Our mission is to empower
+                    people to take action towards a more sustainable future through education, advocacy, and community
+                    building. We strive to be a trusted source of guidance and support, inspiring and enabling
+                    individuals and organizations to make sustainable choices that benefit both the environment and
+                    society.
+                </p>
+
+            </div>
+            <div class="text-black">
+                <h2 class="font-bold text-xl text-center">Our Values</h2>
+                <p class="text-justify text-sm md:text-md">
+                    Our commitment to sustainability is grounded in our core values of accessibility, inclusivity, and
+                    diversity. We believe that collaboration and partnership are essential to creating positive change,
+                    and we are dedicated to working with others towards a more sustainable future. We hold ourselves to
+                    the highest standards of integrity, transparency, and ethical behavior, using our platform to
+                    promote environmental awareness and inspire action towards a better world for all.
+                </p>
+
+            </div>
+        </div>
+
+
+    </div>-->
+
+
+</body>
+<script>
+
+</script>
+
+
+</html>
