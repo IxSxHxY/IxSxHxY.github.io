@@ -64,7 +64,7 @@ const facts = [
     "Sulfur dioxide (SO2) is released during the combustion of fossil fuels, particularly in industrial processes. It can cause respiratory issues and contribute to the formation of acid rain.",
     "Ozone (O3) at ground level, known as tropospheric ozone, is formed when pollutants like nitrogen oxides and volatile organic compounds react in the presence of sunlight. High levels of ozone can cause respiratory problems and irritate the eyes.",
     "Volatile organic compounds (VOCs) are emitted by various sources such as paints, solvents, cleaning products, and vehicle emissions. They can have short-term and long-term health effects, including eye and respiratory irritation and the potential for organ damage.",
-    "The Air Quality Index (AQI) is a scale used to measure and report daily air quality levels. It categorizes air quality into six levels, ranging from "good" to "hazardous, " based on pollutant concentrations.",
+    "The Air Quality Index (AQI) is a scale used to measure and report daily air quality levels. It categorizes air quality into six levels, ranging from 'good' to hazardous, ' based on pollutant concentrations.",
     "Urban areas tend to have higher levels of air pollution due to increased industrial activities, traffic congestion, and population density.",
     "Exposure to air pollution during pregnancy can have adverse effects on fetal development, including low birth weight, preterm birth, and developmental issues.",
     "Long-term exposure to air pollution has been associated with an increased risk of chronic conditions such as heart disease, stroke, lung cancer, and respiratory infections.",
