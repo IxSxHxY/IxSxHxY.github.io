@@ -2,6 +2,11 @@ let allMarkers = {};
 
 let map;
 
+
+// The country the users may checkout,
+// We have this object to map the country name to its
+// boundaries box.
+// So that we can move to that part directly
 const locations = {
     China: "24.583095,92.715825,53.597722,135.263672",
     Taiwan: "21.855381,119.605957,25.288411,122.286621",
@@ -125,14 +130,17 @@ const locations = {
 
 };
 
+// getter for map
 export function getLocations() {
     return locations;
 }
 
+// setter for map
 export function setMap(newMap) {
     map = newMap;
 }
 
+// getter for map
 export function getMap() {
     return map;
 }
@@ -185,8 +193,7 @@ export function createMap() {
                 bounds.getSouth() +
                 "," +
                 bounds.getEast();
-            //document.getElementById("leaflet-map-bounds").innerHTML = bounds;
-            // [lat1, lng1, lat2, lng2]
+
             populateMarkers(bounds, true);
         });
     }, 1000);
@@ -209,11 +216,12 @@ export function populateMarkers(bounds, isRefresh) {
         .then((stations) => {
             console.log(stations)
             if (stations.status != "ok") throw stations.data;
-
+            // We take only 300 stations, otherwise
+            // the website will be extremely laggy
+            // when need to fetch a lot of station
+            // and put the markers
             stations.data.slice(0, 300).forEach((station) => {
                 count ++;
-                //console.log(`count=${count}`)
-                //if (count > 1000) return;
                 if (allMarkers[station.uid])
                     map.removeLayer(allMarkers[station.uid]);
 
@@ -232,6 +240,8 @@ export function populateMarkers(bounds, isRefresh) {
                     icon: icon,
                 }).addTo(map);
 
+                // When marker is clicked,
+                // Show the details
                 marker.on("click", () => {
                     let popup = L.popup()
                         .setLatLng([station.lat, station.lon])
@@ -245,11 +255,14 @@ export function populateMarkers(bounds, isRefresh) {
 
                 allMarkers[station.uid] = marker;
             });
+            
+            // hide the error showing element
             document.getElementById("leaflet-map-error").style.display = "none";
             return stations.data.map(
                 (station) => new L.LatLng(station.lat, station.lon)
             );
         })
+        //show the error
         .catch((e) => {
             var o = document.getElementById("leaflet-map-error");
             o.innerHTML = `<p class="text-center">Something wrong happened: <code class="bg-gray-600 text-white px-2">${e}</code>. If the map is failed to fetch, please refresh the page</p>`;
@@ -257,6 +270,9 @@ export function populateMarkers(bounds, isRefresh) {
         });
 }
 
+
+// Put the markers into the map,
+// Then, move to that location(bounds)
 export function populateAndFitMarkers(bounds) {
     removeMarkers(map);
     if (bounds.split(",").length == 2) {
@@ -275,11 +291,14 @@ export function populateAndFitMarkers(bounds) {
     });
 }
 
+// Remove markers
 function removeMarkers(map) {
     Object.values(allMarkers).forEach((marker) => map.removeLayer(marker));
     allMarkers = {};
 }
 
+
+// Popup when the marker is clicked
 function getMarkerPopup(markerUID) {
     return getMarkerAQI(markerUID).then((marker) => {
         let info =
@@ -334,6 +353,8 @@ function getMarkerAQI(markerUID) {
         });
 }
 
+// Initialize map and move the starting
+// location to Malaysia
 export function initMap() {
     
     //[lat1, lng1, lat2, lng2]

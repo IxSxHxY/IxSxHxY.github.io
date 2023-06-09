@@ -100,10 +100,12 @@ const facts = [
     "Urban heat islands, characterized by higher temperatures in densely populated areas, can exacerbate air pollution by enhancing the formation of ground-level ozone and trapping pollutants."
 ]
 
+// reset animation
 function reset() {
     gsap.to('#fact', { rotation: 0, x: 0, y: 0, scale: 1, duration: 0.5 });
 }
 
+// animation that will be used
 let animations = [
     function () { gsap.to("#fact", { rotation: 5, duration: 1 }) },
     function () { gsap.to("#fact", { rotation: -5, duration: 1 }) },
@@ -157,8 +159,11 @@ let animations = [
     }
 ]
 
+// Use previous variable to check if current is repeating
 let prevFact = -1;
 let prevAnimation = -1;
+
+// Get random fact
 function randomFact() {
     let random = Math.round(Math.random() * (facts.length - 1));
     while (random == prevFact) random = Math.round(Math.random() * (facts.length - 1));
@@ -166,6 +171,8 @@ function randomFact() {
     prevFact = random;
 }
 
+
+// Get random animation for current fact
 function randomAnimation() {
     let random = Math.round(Math.random() * (animations.length - 1));
     while (random == prevAnimation) random = Math.round(Math.random() * (animations.length - 1));
@@ -173,15 +180,22 @@ function randomAnimation() {
     return animations[Math.round(Math.random() * (animations.length - 1))];
 }
 
+
+// Generate another fact and animation when clicked
 generateEl.addEventListener('click', function () {
     reset();
     randomFact();
     randomAnimation()();
 
 });
+
+
+// Reset the animation
 resetEl.addEventListener('click', function () {
     reset();
 })
+
+// Do another animation when clicked
 animEl.addEventListener('click', function () {
     reset();
     randomAnimation()();

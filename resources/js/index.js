@@ -1,15 +1,25 @@
+// Import the function from the module
 import {initMap, createMap, populateAndFitMarkers, setMap, getMap, getLocations, populateMarkers} from './map.js';
+
+// The name of the country for auto-complete
 var countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua & Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia & Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Arfrican Republic", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauro", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre & Miquelon", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Kitts & Nevis", "St Lucia", "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad & Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks & Caicos", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
 
+// Get the HTML object needed
 const searchCountryEl = document.getElementById("searchCountry");
 const searchFormEl = document.getElementById("searchForm");
 const submitButtonEl = document.getElementById("submitButton");
 const mapContainerEl = document.getElementById("mapContainer");
 
 
+
+// Auto complete the country 
 function autocomplete(inp, arr) {
 
+    // currentFocus is for when using keyboard up and down to select the suggestion
     var currentFocus;
+
+    // When the user is typing, check if there is any matched keyword, if so, then
+    // make a suggestion for autocomplete
     inp.addEventListener("input", function (e) {
         var a, b, i, val = this.value;
 
@@ -17,6 +27,7 @@ function autocomplete(inp, arr) {
         if (!val) { return false; }
         currentFocus = -1;
 
+        // Create a <div> to put the suggestion
         a = document.createElement("div");
         a.setAttribute("id", this.id + "autocomplete-list");
         a.setAttribute("class", "no-scrollbar autocomplete-items absolute w-full bg-gray-200 overflow-y-scroll z-99 rounded-b-lg p-2 border border-black");
@@ -24,6 +35,7 @@ function autocomplete(inp, arr) {
 
         this.parentNode.appendChild(a);
 
+        // Use for loop to check matched coutnry name
         for (i = 0; i < arr.length; i++) {
 
             if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
@@ -47,7 +59,8 @@ function autocomplete(inp, arr) {
             }
         }
     });
-    /*execute a function presses a key on the keyboard:*/
+    
+    // execute a function presses a key on the keyboard:
     inp.addEventListener("keydown", function (e) {
         var x = document.getElementById(this.id + "autocomplete-list");
         if (x) x = x.getElementsByTagName("div");
@@ -55,34 +68,33 @@ function autocomplete(inp, arr) {
             /*If the arrow DOWN key is pressed,
             increase the currentFocus variable:*/
             currentFocus++;
-            /*and and make the current item more visible:*/
+            // and and make the current item more visible:
             addActive(x);
         } else if (e.keyCode == 38) { //up
             /*If the arrow UP key is pressed,
             decrease the currentFocus variable:*/
             currentFocus--;
-            /*and and make the current item more visible:*/
+            // and and make the current item more visible:
             addActive(x);
         } else if (e.keyCode == 13) {
-            /*If the ENTER key is pressed, prevent the form from being submitted,*/
+            // If the ENTER key is pressed, prevent the form from being submitted,
             if (currentFocus > -1) {
-                /*and simulate a click on the "active" item:*/
+                // and simulate a click on the "active" item:
                 if (x) x[currentFocus].click();
             }
         }
     });
     function addActive(x) {
-        /*a function to classify an item as "active":*/
+        // a function to classify an item as "active":
         if (!x) return false;
-        /*start by removing the "active" class on all items:*/
+        // start by removing the "active" class on all items:
         removeActive(x);
         if (currentFocus >= x.length) currentFocus = 0;
         if (currentFocus < 0) currentFocus = (x.length - 1);
         x[currentFocus].classList.add("bg-white");
-        //x[currentFocus].classList.add("autocomplete-active");
     }
     function removeActive(x) {
-        /*a function to remove the "active" class from all autocomplete items:*/
+        // a function to remove the "active" class from all autocomplete items:
         for (var i = 0; i < x.length; i++) {
             x[i].classList.remove("bg-white");
         }
@@ -97,12 +109,15 @@ function autocomplete(inp, arr) {
             }
         }
     }
-    /*execute a function when someone clicks in the document:*/
+    // /xecute a function when someone clicks in the document:
     document.addEventListener("click", function (e) {
         closeAllLists(e.target);
     });
 }
 
+
+// When the form is submitted/a country name is typed, stop the redirection,
+// Then move the map to the country typed, and put the markers
 function handleSubmit(event) {
     event.preventDefault();
     console.log(searchCountryEl.value)
@@ -113,12 +128,14 @@ function handleSubmit(event) {
     return false;
 }
 
+// Dun let the form submit/refresh
 searchFormEl.onsubmit = function(e) {
     e.preventDefault();
     handleSubmit(e);
     return false;
 };
 
+// initialization 
 setMap(createMap());
 initMap();
 autocomplete(searchCountryEl, countries);

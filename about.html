@@ -19,7 +19,7 @@
       integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
       crossorigin=""
     ></script>
-
+    <link rel="icon" type="image/x-icon" href="resources/images/logo.png">
     <script
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.min.js"
       defer
@@ -34,35 +34,59 @@
 
   <body class="w-full bg-gray-300 h-screen">
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
-        <div class="w-full flex flex-col md:flex-row md:flex-wrap flex-wrap items-center justify-between p-4">
-            <a href="./index.html" class="flex items-center">
-                <img src="/resources/images/logo.png" class="h-8 mr-3" alt="Icon">
-                <!--<img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo" /> -->
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Air Quality
-                    Index</span>
-            </a>
-            <div class="self-center text-center text-[20px] flex flex-col md:flex-row md:flex-wrap justify-center lg:flex-nowrap">
-                <a class=" text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold" href="/">
-                    World Map
-                </a>
-                <!-- <span class="text-white">|</span> --> 
-                <a class="text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold "
-                    href="./station.html">
-                    Specific station
-                </a>
-                <!-- <span class="text-white">|</span> --> 
-                <a class="text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold" href="./facts.html">
-                    Knowledge
-                </a>
-                <a class="text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold" href="./about.html">
-                    About us
-                </a>
-            </div>
-           
+      <div
+        class="w-full flex justify-between p-4  max-[1000px]:items-center max-[1000px]:flex-col"
+      >
+      <!-- flex flex-col justify-center sm:flex-row md:flex-wrap flex-wrap items-center sm:justify-between p-4 -->
+        <a href="./index.html" class="flex items-center">
+          <img src="/resources/images/logo.png" class="h-8 mr-3" alt="Icon" />
+          <!--<img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo" /> -->
+          <span
+            class="self-center text-2xl  font-semibold whitespace-nowrap dark:text-white"
+            >Air Quality Index</span
+          >
+        </a>
+        <div
+          class="self-center text-center max-[500px]:flex-col  max-[750px]:text-sm text-xl flex flex-row justify-center lg:flex-nowrap"
+        >
+          <a
+            class="text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold"
+            href="/"
+          >
+            World Map
+          </a>
+          <a
+            class="text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold"
+            href="./feed.html"
+          >
+            Feed
+          </a>
+          <!-- <span class="text-white">|</span> -->
+          <a
+            class="text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold"
+            href="./station.html"
+          >
+            Specific station
+          </a>
+          <!-- <span class="text-white">|</span> -->
+
+          <a
+            class="text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold"
+            href="./facts.html"
+          >
+            Knowledge
+          </a>
+          <a
+            class="text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold"
+            href="./about.html"
+          >
+            About us
+          </a>
         </div>
+      </div>
     </nav>
     <div
-      class="flex flex-wrap w-full p-5 border border-blue-500"
+      class="flex flex-wrap w-full p-5"
       x-data="{
         data: [
         {
@@ -167,65 +191,6 @@
         </p>
       </div>
     </div>
-    <!-- <div id=" leaflet-locations">
-        </div> 
-        <!-- 
-    <div id="content" class="p-5 w-full h-[80%]">
-        <h1 class="font-bold text-4xl text-center">About Us</h1>
-        <div class="grid grid-cols-2 gap-3 md:gap-10">
 
-            <div class="text-black">
-                <h2 class="font-bold text-xl text-center">Our Vision</h2>
-                <p class="text-justify text-sm lg:text-md">
-                    We envision a future in which sustainability and environmental awareness are woven into the fabric
-                    of society, with individuals and organizations around the world taking action to create a
-                    sustainable and equitable world for all. We aspire to be a leading platform for promoting
-                    sustainability and environmental awareness, inspiring individuals and organizations to take action
-                    towards a more sustainable future. Our vision is a world where sustainability is the norm, and where
-                    people from all walks of life are committed to preserving our planet for future generations.
-                </p>
-
-            </div>
-            <div class="text-black">
-                <h2 class="font-bold text-xl text-center">Our Goal</h2>
-                <p class="text-justify text-sm md:text-md">
-                    Our goal is to promote a culture of sustainability and environmental stewardship that ensures a
-                    healthy planet and a better future for all. We believe that through education, advocacy, and
-                    community building, we can inspire and support individuals and organizations to make sustainable
-                    choices that benefit both the environment and society. We strive to provide actionable guidance and
-                    resources that promote sustainable practices in daily life, business, and policy-making.
-                </p>
-
-            </div>
-            <div class="text-black">
-
-                <h2 class="font-bold text-xl text-center">Our Mission</h2>
-
-                <p class="text-justify text-sm md:text-md">
-                    To promote sustainability and environmental awareness by providing accessible and actionable
-                    information and resources to individuals, businesses, and policymakers. Our mission is to empower
-                    people to take action towards a more sustainable future through education, advocacy, and community
-                    building. We strive to be a trusted source of guidance and support, inspiring and enabling
-                    individuals and organizations to make sustainable choices that benefit both the environment and
-                    society.
-                </p>
-
-            </div>
-            <div class="text-black">
-                <h2 class="font-bold text-xl text-center">Our Values</h2>
-                <p class="text-justify text-sm md:text-md">
-                    Our commitment to sustainability is grounded in our core values of accessibility, inclusivity, and
-                    diversity. We believe that collaboration and partnership are essential to creating positive change,
-                    and we are dedicated to working with others towards a more sustainable future. We hold ourselves to
-                    the highest standards of integrity, transparency, and ethical behavior, using our platform to
-                    promote environmental awareness and inspire action towards a better world for all.
-                </p>
-
-            </div>
-        </div>
-
-
-    </div>-->
   </body>
-  <script></script>
 </html>

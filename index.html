@@ -1,106 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>World Map</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.min.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+      crossorigin=""
+    ></script>
+    <link rel="icon" type="image/x-icon" href="resources/images/logo.png" />
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.min.js"
+      defer
+    ></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script src="//unpkg.com/alpinejs" defer></script>
 
-    <link rel="stylesheet" href="/resources/css/index.css">
+    <link rel="stylesheet" href="/resources/css/index.css" />
 
     <script type="module" src="/resources/js/map.js"></script>
 
     <script type="module" src="/resources/js/index.js"></script>
+  </head>
 
-</head>
-
-<body class="w-full bg-gray-300 h-screen">
+  <body class="w-full bg-gray-300 h-screen">
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
-        <div class="w-full flex flex-col md:flex-row md:flex-wrap flex-wrap items-center justify-between p-4">
-            <a href="./index.html" class="flex items-center">
-                <img src="/resources/images/logo.png" class="h-8 mr-3" alt="Icon">
-                <!--<img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo" /> -->
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Air Quality
-                    Index</span>
-            </a>
-            <div class="self-center text-center text-[20px] flex flex-col md:flex-row md:flex-wrap justify-center lg:flex-nowrap">
-                <a class=" text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold" href="/">
-                    World Map
-                </a>
-                <!-- <span class="text-white">|</span> --> 
-                <a class="text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold "
-                    href="./station.html">
-                    Specific station
-                </a>
-                <!-- <span class="text-white">|</span> --> 
-                
-                <a class="text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold" href="./facts.html">
-                    Knowledge
-                </a>
-                <a class="text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold" href="./about.html">
-                    About us
-                </a>
-            </div>
-           
+      <div
+        class="w-full flex justify-between p-4  max-[1000px]:items-center max-[1000px]:flex-col"
+      >
+      <!-- flex flex-col justify-center sm:flex-row md:flex-wrap flex-wrap items-center sm:justify-between p-4 -->
+        <a href="./index.html" class="flex items-center">
+          <img src="/resources/images/logo.png" class="h-8 mr-3" alt="Icon" />
+          <!--<img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo" /> -->
+          <span
+            class="self-center text-2xl  font-semibold whitespace-nowrap dark:text-white"
+            >Air Quality Index</span
+          >
+        </a>
+        <div
+          class="self-center text-center max-[500px]:flex-col  max-[750px]:text-sm text-xl flex flex-row justify-center lg:flex-nowrap"
+        >
+        <!-- Navbar links -->
+          <a
+            class="text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold"
+            href="/"
+          >
+            World Map
+          </a>
+          <a
+            class="text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold"
+            href="./feed.html"
+          >
+            Feed
+          </a>
+          <!-- <span class="text-white">|</span> -->
+          <a
+            class="text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold"
+            href="./station.html"
+          >
+            Specific station
+          </a>
+          <!-- <span class="text-white">|</span> -->
+
+          <a
+            class="text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold"
+            href="./facts.html"
+          >
+            Knowledge
+          </a>
+          <a
+            class="text-white mx-2 hover:underline hover:underline-gray-200 hover:font-bold"
+            href="./about.html"
+          >
+            About us
+          </a>
         </div>
+      </div>
     </nav>
     <!-- <div id="leaflet-locations"></div> -->
 
     <div class="flex-col flex-wrap">
-        <h1 class="font-bold text-center text-xl">Air Quality Index(AQI) for the countries</h1>
-        <form id="searchForm" class="w-full" onsubmit="return handleSubmit(event)">
+      <!-- Title -->
+      <h1 class="font-bold text-center text-xl">
+        Air Quality Index(AQI) for the countries
+      </h1>
+      <!-- We use form so that we can press enter to get the country's location -->
+      <form
+        id="searchForm"
+        class="w-full"
+        onsubmit="return handleSubmit(event)"
+      >
+        <label
+          for="searchCountry"
+          class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+          >Search</label
+        >
+        <div class="relative">
+          <div
+            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+          >
+            <svg
+              aria-hidden="true"
+              class="w-5 h-5 text-gray-500 dark:text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              ></path>
+            </svg>
+          </div>
+          <div class="autocomplete">
+            <input
+              type="search"
+              id="searchCountry"
+              class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-t-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Search the AQI of a country"
+              required
+            />
+            <button type="button" onclick="" hidden></button>
 
-            <label for="searchCountry"
-                class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                </div>
-                <div class="autocomplete">
-                    <input type="search" id="searchCountry"
-                        class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-t-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Search the AQI of a country" required>
-                    <button type="button" onclick="" hidden></button>
-                    <!--<button type="submit" id="submitButtonEl"
-                        class="text-white bg-blue-700 hover:bg-blue-800 absolute right-2.5 bottom-2.5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
-                    -->
-                </div>
-
-            </div>
-        </form>
-        <!--
-        <form autocomplete="off" id="searchForm" class="bg-yellow-500 overflow-y-auto">
-            <div class="autocomplete" style="width:300px;">
-                <input id="searchCountry" type="text" name="myCountry" placeholder="Country"
-                    class="rounded-lg px-2 active:border-blue-500">
-                <input type="submit" id="">
-            </div>
-
-        </form> -->
-        <div id="mapContainer" class="flex flex-col w-full h-full align-items">
-            <div id="map" class="" style="min-width:500px; min-height:530px;"></div>
-            <div id="leaflet-map-error"></div>
-
-            <div id="leaflet-map-bounds" class="text-sm text-black"></div>
+          </div>
         </div>
-        <div class="mt-2 w-full flex flex-wrap justify-center" x-data="{
-            open: [false, false, false, false, false, false],
+      </form>
 
+      <div id="mapContainer" class="flex flex-col w-full h-full align-items">
+        <div
+          id="map"
+          class=""
+          style="min-width: 500px; min-height: 530px"
+        ></div>
+        <div id="leaflet-map-error"></div>
+
+        <div id="leaflet-map-bounds" class="text-sm text-black"></div>
+      </div>
+
+      <!-- Alpine js to show/hide an element -->
+      <div
+        class="mt-2 w-full flex flex-wrap justify-center"
+        x-data="{
+            open: [false, false, false, false, false, false],
+    
             toggle(curr) {
                 this.open[curr] = !this.open[curr];
                 closeOthers(curr);
@@ -109,243 +167,370 @@
                 for(let i = 0;i < open.length;i++)
                     this.open[i] = (i == curr)?this.open[curr]:false;
             }
-        }">
-            <div class="md:mx-3 m-1">
-                <button
-                    class="bg-green-600 border rounded-md border-white drop-shadow shadow-black border-2 p-1 text-white font-bold hover:scale-110 hover:text-black hover:bg-white hover:border-green-600"
-                    @click="toggle(0)">0-50</button>
-                <!-- <img class="hover:-translate-y-1 hover:scale-110" src="https://waqi.info/mapicon/0-50.10.png" @click="toggle(0)"> -->
+        }"
+      >
+        <div class="md:mx-3 m-1">
+          <button
+            class="bg-green-600 border rounded-md border-white drop-shadow shadow-black border-2 p-1 text-white font-bold hover:scale-110 hover:text-black hover:bg-white hover:border-green-600"
+            @click="toggle(0)"
+          >
+            0-50
+          </button>
+          <!-- hidden information -->
+          <div
+            x-show="open[0]"
+            class="absolute bottom-[10%] z-[9999] left-[50%] transfom bg-white w-fit p-4 rounded-lg"
+            style="transform: translate(-50%, -50%)"
+            @click.away="toggle(0)"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 scale-90"
+            x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-90"
+          >
+            <div class="flex justify-between">
+              <p class="self-center">0-50 <b>Good</b></p>
 
-                <!-- hidden information -->
-                <div x-show="open[0]"
-                    class="absolute bottom-[10px] z-[9999] left-[50%] transfom bg-white w-fit p-4 rounded-lg"
-                    style="transform: translate(-50%, -50%);" @click.away="toggle(0)"
-                    x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90"
-                    x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-300"
-                    x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
-                    <div class="flex justify-between">
-
-                        <p class="self-center">0-50 <b>Good</b></p>
-
-                        <button type="button"
-                            class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-                            @click="toggle(0)">
-
-                            <span class="sr-only">Close menu</span>
-                            <!-- Heroicon name: outline/x -->
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-
-                    </div>
-
-                    <hr class="bg-black">
-                    <p>Air quality is considered satisfactory, and air pollution poses little or no risk</p>
-                </div>
-            </div>
-            <div class="md:mx-3 m-1">
-                <button
-                    class="bg-yellow-500 border rounded-md border-white drop-shadow shadow-black border-2 p-1 text-white font-bold hover:scale-110 hover:text-black hover:bg-white hover:border-yellow-500"
-                    @click="toggle(1)">51-100</button>
-                <!-- <img src="https://waqi.info/mapicon/51-100.10.png" @click="toggle(1)"> -->
-                <div x-show="open[1]"
-                    class="absolute bottom-[10px] z-[9999] left-[50%] transform bg-white w-fit p-4 rounded-lg"
-                    style="transform: translate(-50%, -50%);" @click.away="toggle(1)"
-                    x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90"
-                    x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-300"
-                    x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
-
-                    <div class="flex justify-between">
-
-                        <p class="self-center">51-100 <b>Good</b></p>
-
-                        <button type="button"
-                            class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-                            @click="toggle(1)">
-
-                            <span class="sr-only">Close menu</span>
-                            <!-- Heroicon name: outline/x -->
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-
-                    </div>
-
-                    <hr class="bg-black">
-                    <p class="mb-1">Air quality is acceptable; however, for some pollutants there may be a moderate health concern
-                        for a very small number of people who are unusually sensitive to air pollution.</p>
-                    <p>Active children and adults, and people with respiratory disease, such as asthma, should limit
-                        prolonged outdoor exertion.</p>
-
-                </div>
-            </div>
-            <div class="md:mx-3 m-1">
-                <button
-                    class="bg-orange-500 border rounded-md border-white drop-shadow shadow-black border-2 p-1 text-white font-bold hover:scale-110 hover:text-black hover:bg-white hover:border-orange-500"
-                    @click="toggle(2)">101-150</button>
-                <!-- <img src="https://waqi.info/mapicon/101-150.10.png" @click="toggle(2)"> -->
-                <div x-show="open[2]"
-                    class="absolute bottom-[10px] z-[9999] left-[50%] transfom bg-white w-fit p-4 rounded-lg"
-                    style="transform: translate(-50%, -50%);" @click.away="toggle(2)"
-                    x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90"
-                    x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-300"
-                    x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
-
-                    <div class="flex justify-between">
-
-                        <p class="self-center">101-150 <b class="text-md">Unhealthy for Sensitive Groups</b></p>
-
-                        <button type="button"
-                            class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-                            @click="toggle(2)">
-
-                            <span class="sr-only">Close menu</span>
-                            <!-- Heroicon name: outline/x -->
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-
-                    </div>
-
-                    <hr class="bg-black">
-
-                    <p class="text-sm mb-1">Members of sensitive groups may experience health effects. The general public is not likely to be affected. </p>
-                    <p class="text-sm mb-1">Active children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion. </p>
-                </div>
-            </div>
-            <div class="md:mx-3 m-1">
-                <button
-                    class="bg-red-800 border rounded-md border-white drop-shadow shadow-black border-2 p-1 text-white font-bold hover:scale-110 hover:text-black hover:bg-white hover:border-red-800"
-                    @click="toggle(3)">151-200</button>
-                <!-- <img src="https://waqi.info/mapicon/151-200.10.png" @click="toggle(3)"> -->
-                <div x-show="open[3]"
-                    class="absolute bottom-[10px] z-[9999] left-[50%] transfom bg-white w-fit p-4 rounded-lg"
-                    style="transform: translate(-50%, -50%);" @click.away="toggle(3)"
-                    x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90"
-                    x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-300"
-                    x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
-
-                    <div class="flex justify-between">
-
-                        <p class="self-center">151-200 <b>Unhealthy</b></p>
-
-                        <button type="button"
-                            class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-                            @click="toggle(3)">
-
-                            <span class="sr-only">Close menu</span>
-                            <!-- Heroicon name: outline/x -->
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-
-                    </div>
-
-                    <hr class="bg-black">   
-                    
-                    
-                    
-                    <p class="text-sm mb-1">Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects</p>
-                    <p class="text-sm mb-1">Active children and adults, and people with respiratory disease, such as asthma, should avoid prolonged outdoor exertion; everyone else, especially children, should limit prolonged outdoor exertion</p>
-                </div>
-            </div>
-            <div class="md:mx-3 m-1">
-                <button
-                    class="bg-violet-900 border rounded-md border-white drop-shadow shadow-black border-2 p-1 text-white font-bold hover:scale-110 hover:text-black hover:bg-white hover:border-violet-900"
-                    @click="toggle(4)">201-300</button>
-                <!-- <img src="https://waqi.info/mapicon/201-300.10.png" @click="toggle(4)"> -->
-                <div x-show="open[4]"
-                    class="absolute bottom-[10px] z-[9999] left-[50%] transfom bg-white w-fit p-4 rounded-lg"
-                    style="transform: translate(-50%, -50%);" @click.away="toggle(4)"
-                    x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90"
-                    x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-300"
-                    x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
-
-
-                    <div class="flex justify-between">
-
-                        <p class="self-center">201-300 <b>Very Unhealthy</b></p>
-
-                        <button type="button"
-                            class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-                            @click="toggle(4)">
-
-                            <span class="sr-only">Close menu</span>
-                            <!-- Heroicon name: outline/x -->
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-
-                    </div>
-
-                    <hr class="bg-black">   
-                    <p class="text-sm mb-1">Health warnings of emergency conditions. The entire population is more likely to be affected.</p>
-                    <p class="text-sm mb-1">Active children and adults, and people with respiratory disease, such as asthma, should avoid all outdoor exertion; everyone else, especially children, should limit outdoor exertion.</p>
-
-                    <p class="text-sm mb-1">Air quality is considered satisfactory, and air pollution poses little or no risk</p>
-                </div>
-            </div>
-            <div class="md:mx-3 m-1">
-                <button
-                    class="bg-amber-950 border rounded-md border-white drop-shadow shadow-black border-2 p-1 text-white font-bold hover:scale-110 hover:text-black hover:bg-white hover:border-amber-950"
-                    @click="toggle(5)">300+</button>
-                <!--<img src="https://waqi.info/mapicon/300+.10.png" @click="toggle(5)"> -->
-                <div x-show="open[5]"
-                    class="absolute bottom-[10px] z-[9999] left-[50%] sm:left-[50%] transfom bg-white w-fit p-4 rounded-lg"
-                    style="transform: translate(-50%, -50%);" @click.away="toggle(5)"
-                    x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90"
-                    x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-300"
-                    x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
-
-
-                    <div class="flex justify-between">
-
-                        <p class="self-center">300+ <b>Hazardous</b></p>
-
-                        <button type="button"
-                            class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-                            @click="toggle(5)">
-
-                            <span class="sr-only">Close menu</span>
-                            <!-- Heroicon name: outline/x -->
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-
-                    </div>
-
-                    <hr class="bg-black">
-
-                    <p class="text-sm mb-1">Health alert: everyone may experience more serious health effects</p>
-                    <p class="text-sm mb-1">Everyone should avoid all outdoor exertion</p>
-                    
-
-                </div>
+              <button
+                type="button"
+                class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                @click="toggle(0)"
+              >
+                <span class="sr-only">Close menu</span>
+                <!-- Heroicon name: outline/x -->
+                <svg
+                  class="h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
             </div>
 
+            <hr class="bg-black" />
+            <p>
+              Air quality is considered satisfactory, and air pollution poses
+              little or no risk
+            </p>
+          </div>
         </div>
+        <div class="md:mx-3 m-1">
+          <button
+            class="bg-yellow-500 border rounded-md border-white drop-shadow shadow-black border-2 p-1 text-white font-bold hover:scale-110 hover:text-black hover:bg-white hover:border-yellow-500"
+            @click="toggle(1)"
+          >
+            51-100
+          </button>
+          <!-- <img src="https://waqi.info/mapicon/51-100.10.png" @click="toggle(1)"> -->
+          <div
+            x-show="open[1]"
+            class="absolute bottom-[10%] z-[9999] left-[50%] transform bg-white w-fit p-4 rounded-lg"
+            style="transform: translate(-50%, -50%)"
+            @click.away="toggle(1)"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 scale-90"
+            x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-90"
+          >
+            <div class="flex justify-between">
+              <p class="self-center">51-100 <b>Moderate</b></p>
+
+              <button
+                type="button"
+                class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                @click="toggle(1)"
+              >
+                <span class="sr-only">Close menu</span>
+                <!-- Heroicon name: outline/x -->
+                <svg
+                  class="h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <hr class="bg-black" />
+            <p class="mb-1">
+              Air quality is acceptable; however, for some pollutants there may
+              be a moderate health concern for a very small number of people who
+              are unusually sensitive to air pollution.
+            </p>
+            <p>
+              Active children and adults, and people with respiratory disease,
+              such as asthma, should limit prolonged outdoor exertion.
+            </p>
+          </div>
+        </div>
+        <div class="md:mx-3 m-1">
+          <button
+            class="bg-orange-500 border rounded-md border-white drop-shadow shadow-black border-2 p-1 text-white font-bold hover:scale-110 hover:text-black hover:bg-white hover:border-orange-500"
+            @click="toggle(2)"
+          >
+            101-150
+          </button>
+          <!-- <img src="https://waqi.info/mapicon/101-150.10.png" @click="toggle(2)"> -->
+          <div
+            x-show="open[2]"
+            class="absolute bottom-[10%] z-[9999] left-[50%] transfom bg-white w-fit p-4 rounded-lg"
+            style="transform: translate(-50%, -50%)"
+            @click.away="toggle(2)"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 scale-90"
+            x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-90"
+          >
+            <div class="flex justify-between">
+              <p class="self-center">
+                101-150 <b class="text-md">Unhealthy for Sensitive Groups</b>
+              </p>
+
+              <button
+                type="button"
+                class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                @click="toggle(2)"
+              >
+                <span class="sr-only">Close menu</span>
+                <!-- Heroicon name: outline/x -->
+                <svg
+                  class="h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <hr class="bg-black" />
+
+            <p class="text-sm mb-1">
+              Members of sensitive groups may experience health effects. The
+              general public is not likely to be affected.
+            </p>
+            <p class="text-sm mb-1">
+              Active children and adults, and people with respiratory disease,
+              such as asthma, should limit prolonged outdoor exertion.
+            </p>
+          </div>
+        </div>
+        <div class="md:mx-3 m-1">
+          <button
+            class="bg-red-800 border rounded-md border-white drop-shadow shadow-black border-2 p-1 text-white font-bold hover:scale-110 hover:text-black hover:bg-white hover:border-red-800"
+            @click="toggle(3)"
+          >
+            151-200
+          </button>
+          <!-- <img src="https://waqi.info/mapicon/151-200.10.png" @click="toggle(3)"> -->
+          <div
+            x-show="open[3]"
+            class="absolute bottom-[10%] z-[9999] left-[50%] transfom bg-white w-fit p-4 rounded-lg"
+            style="transform: translate(-50%, -50%)"
+            @click.away="toggle(3)"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 scale-90"
+            x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-90"
+          >
+            <div class="flex justify-between">
+              <p class="self-center">151-200 <b>Unhealthy</b></p>
+
+              <button
+                type="button"
+                class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                @click="toggle(3)"
+              >
+                <span class="sr-only">Close menu</span>
+                <!-- Heroicon name: outline/x -->
+                <svg
+                  class="h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <hr class="bg-black" />
+
+            <p class="text-sm mb-1">
+              Everyone may begin to experience health effects; members of
+              sensitive groups may experience more serious health effects
+            </p>
+            <p class="text-sm mb-1">
+              Active children and adults, and people with respiratory disease,
+              such as asthma, should avoid prolonged outdoor exertion; everyone
+              else, especially children, should limit prolonged outdoor exertion
+            </p>
+          </div>
+        </div>
+        <div class="md:mx-3 m-1">
+          <button
+            class="bg-violet-900 border rounded-md border-white drop-shadow shadow-black border-2 p-1 text-white font-bold hover:scale-110 hover:text-black hover:bg-white hover:border-violet-900"
+            @click="toggle(4)"
+          >
+            201-300
+          </button>
+          <!-- <img src="https://waqi.info/mapicon/201-300.10.png" @click="toggle(4)"> -->
+          <div
+            x-show="open[4]"
+            class="absolute bottom-[10%] z-[9999] left-[50%] transfom bg-white w-fit p-4 rounded-lg"
+            style="transform: translate(-50%, -50%)"
+            @click.away="toggle(4)"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 scale-90"
+            x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-90"
+          >
+            <div class="flex justify-between">
+              <p class="self-center">201-300 <b>Very Unhealthy</b></p>
+
+              <button
+                type="button"
+                class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                @click="toggle(4)"
+              >
+                <span class="sr-only">Close menu</span>
+                <!-- Heroicon name: outline/x -->
+                <svg
+                  class="h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <hr class="bg-black" />
+            <p class="text-sm mb-1">
+              Health warnings of emergency conditions. The entire population is
+              more likely to be affected.
+            </p>
+            <p class="text-sm mb-1">
+              Active children and adults, and people with respiratory disease,
+              such as asthma, should avoid all outdoor exertion; everyone else,
+              especially children, should limit outdoor exertion.
+            </p>
+
+            <p class="text-sm mb-1">
+              Air quality is considered satisfactory, and air pollution poses
+              little or no risk
+            </p>
+          </div>
+        </div>
+        <div class="md:mx-3 m-1">
+          <button
+            class="bg-amber-950 border rounded-md border-white drop-shadow shadow-black border-2 p-1 text-white font-bold hover:scale-110 hover:text-black hover:bg-white hover:border-amber-950"
+            @click="toggle(5)"
+          >
+            300+
+          </button>
+          <!--<img src="https://waqi.info/mapicon/300+.10.png" @click="toggle(5)"> -->
+          <div
+            x-show="open[5]"
+            class="absolute bottom-[10%] z-[9999] left-[50%] sm:left-[50%] transfom bg-white w-fit p-4 rounded-lg"
+            style="transform: translate(-50%, -50%)"
+            @click.away="toggle(5)"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 scale-90"
+            x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-90"
+          >
+            <div class="flex justify-between">
+              <p class="self-center">300+ <b>Hazardous</b></p>
+
+              <button
+                type="button"
+                class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                @click="toggle(5)"
+              >
+                <span class="sr-only">Close menu</span>
+                <!-- Heroicon name: outline/x -->
+                <svg
+                  class="h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <hr class="bg-black" />
+
+            <p class="text-sm mb-1">
+              Health alert: everyone may experience more serious health effects
+            </p>
+            <p class="text-sm mb-1">
+              Everyone should avoid all outdoor exertion
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
-
-
-</body>
-
-
+  </body>
 </html>

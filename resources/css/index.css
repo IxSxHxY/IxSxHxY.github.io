@@ -51,7 +51,7 @@
   }
   
 
-
+/* For animation */
 .fade-out{
   -webkit-animation: fade-out 0.25s;
   animation: fade-out 0.25s;
