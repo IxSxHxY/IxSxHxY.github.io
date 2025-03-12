@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Wheel</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Telegram Wheel</title>
+        <script src="https://telegram.org/js/telegram-web-app.js"></script>
+        <style>
         body { text-align: center; font-family: Arial, sans-serif; }
         canvas { margin-top: 20px; }
         button { margin-top: 20px; padding: 10px; font-size: 16px; }
-    </style>
-</head>
-<body>
-    <h1>Spin the Wheel!</h1>
-    <canvas id="wheelCanvas" width="300" height="300"></canvas>
-    <button onclick="spinWheel()">Spin</button>
-
-    <script>
+        </style>
+    </head>
+    <body>
+        <h1>Spin the Wheel!</h1>
+        <canvas id="wheelCanvas" width="300" height="300"></canvas>
+        <button onclick="spinWheel()">Spin</button>
+        <script>
         const canvas = document.getElementById("wheelCanvas");
         const ctx = canvas.getContext("2d");
         const options = ["Option 1", "Option 2", "Option 3", "Option 4"];
@@ -65,13 +64,505 @@
         function sendResult(result) {
             if (window.Telegram.WebApp) {
                 Telegram.WebApp.sendData(result);
-                Telegram.WebApp.close();
+                // Telegram.WebApp.close();
             } else {
                 alert("Telegram WebApp API not available.");
             }
         }
         
         drawWheel();
-    </script>
-</body>
+        </script>
+    </body>
+</html>
+///
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Spinning Wheel Selector</title>
+        <script src="https://telegram.org/js/telegram-web-app.js"></script>
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--tg-theme-bg-color, #f5f5f5);
+            color: var(--tg-theme-text-color, #000000);
+        }
+        .container {
+            width: 300px;
+            position: relative;
+            margin-bottom: 30px;
+        }
+        .wheel {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            transition: transform 5s cubic-bezier(0.1, 0.5, 0.1, 1);
+            transform: rotate(0deg);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        .wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+            border-radius: 50%;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        .marker {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 20px solid #e74c3c;
+            z-index: 20;
+        }
+        .section {
+            position: absolute;
+            width: 0;
+            height: 0;
+            transform-origin: 0 0;
+            left: 50%;
+            top: 50%;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .section-text {
+            position: absolute;
+            transform-origin: center;
+            width: 100px;
+            text-align: center;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+        .spin-button {
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: var(--tg-theme-button-color, #4CAF50);
+            color: var(--tg-theme-button-text-color, white);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 200px;
+        }
+        .spin-button:hover {
+            filter: brightness(0.95);
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--tg-theme-text-color, #333);
+        }
+        .options-container {
+            margin-bottom: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .option-input {
+            display: flex;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+        .option-input input {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: var(--tg-theme-secondary-bg-color, #fff);
+            color: var(--tg-theme-text-color, #000);
+        }
+        .option-input button {
+            margin-left: 5px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 0 10px;
+        }
+        .add-option-btn {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: var(--tg-theme-secondary-bg-color, #673AB7);
+            color: var(--tg-theme-text-color, white);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .recipient-container {
+            width: 100%;
+            margin: 10px 0;
+        }
+        h3, h1 {
+            color: var(--tg-theme-text-color, #333);
+        }
+        .recipient {
+            padding: 8px;
+            margin-bottom: 5px;
+            background-color: var(--tg-theme-secondary-bg-color, #eee);
+            border-radius: 4px;
+            color: var(--tg-theme-text-color, #333);
+            cursor: pointer;
+        }
+        </style>
+    </head>
+    <body>
+        <h1>Spinning Wheel Selector</h1>
+        <div class="options-container">
+            <h3>Add Your Options</h3>
+            <div id="options-list">
+                <div class="option-input">
+                    <input type="text" value="Option 1" placeholder="Enter option">
+                    <button onclick="removeOption(this)">X</button>
+                </div>
+                <div class="option-input">
+                    <input type="text" value="Option 2" placeholder="Enter option">
+                    <button onclick="removeOption(this)">X</button>
+                </div>
+                <div class="option-input">
+                    <input type="text" value="Option 3" placeholder="Enter option">
+                    <button onclick="removeOption(this)">X</button>
+                </div>
+                <div class="option-input">
+                    <input type="text" value="Option 4" placeholder="Enter option">
+                    <button onclick="removeOption(this)">X</button>
+                </div>
+            </div>
+            <button class="add-option-btn" onclick="addOption()">Add Option</button>
+        </div>
+        <div class="recipient-container">
+            <h3>Select a recipient:</h3>
+            <div id="recipient-display" class="recipient">
+                Select a recipient from your contacts
+            </div>
+        </div>
+        <div class="container">
+            <div class="wheel" id="wheel"></div>
+            <div class="wheel-center">SPIN</div>
+            <div class="marker"></div>
+        </div>
+        <div class="controls">
+            <button class="spin-button" id="spin-button">Spin the Wheel</button>
+        </div>
+        <div class="result" id="result"></div>
+        <script>
+        // Initialize Telegram WebApp
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+        
+        // Set theme
+        document.documentElement.classList.add('theme-' + (tg.colorScheme || 'light'));
+        
+        const wheel = document.getElementById('wheel');
+        const spinButton = document.getElementById('spin-button');
+        const resultDisplay = document.getElementById('result');
+        const recipientDisplay = document.getElementById('recipient-display');
+        
+        let isSpinning = false;
+        let currentResult = '';
+        let sections = [];
+        let selectedContact = null;
+        
+        // Colors for wheel sections
+        const colors = [
+            '#FF5733', '#33FF57', '#3357FF', '#F333FF', 
+            '#FF33A8', '#33FFF5', '#F5FF33', '#FF8C33',
+            '#8C33FF', '#33FFBD', '#FF5733', '#33FF57'
+        ];
+        
+        // Set up the main button
+        tg.MainButton.setParams({
+            text: 'SEND RESULT',
+            color: '#2196F3',
+            text_color: '#ffffff',
+            is_active: false,
+            is_visible: false
+        });
+        
+        // Main button click handler
+        tg.MainButton.onClick(sendToTelegram);
+        
+        // Handle recipient selection
+        recipientDisplay.addEventListener('click', () => {
+            tg.showPopup({
+                title: 'Select Recipient',
+                message: 'Choose a contact to send the result to',
+                buttons: [
+                    {id: "select_contact", type: "default", text: "Select from Contacts"}
+                ]
+            }, function(buttonId) {
+                if (buttonId === "select_contact") {
+                    // In a real implementation, you would use the Telegram selectContact method
+                    // For this demo, we'll simulate with a simple prompt
+                    const userName = prompt("Enter recipient's username:", "");
+                    if (userName && userName.trim() !== "") {
+                        selectedContact = { user_id: 123456789, username: userName };
+                        recipientDisplay.textContent = `@${userName}`;
+                    }
+                }
+            });
+        });
+        
+        function updateWheel() {
+            // Clear the wheel
+            wheel.innerHTML = '';
+            
+            // Get all options
+            const optionInputs = document.querySelectorAll('.option-input input');
+            const options = Array.from(optionInputs).map(input => input.value).filter(text => text.trim() !== '');
+            
+            if (options.length === 0) {
+                resultDisplay.textContent = 'Add some options first!';
+                return false;
+            }
+            
+            // Create sections
+            sections = [];
+            const sectionAngle = 360 / options.length;
+            
+            options.forEach((option, index) => {
+                const section = document.createElement('div');
+                section.className = 'section';
+                
+                const angleStart = index * sectionAngle;
+                const angleEnd = (index + 1) * sectionAngle;
+                const angle = angleStart + (sectionAngle / 2);
+                
+                section.style.transform = `rotate(${angleStart}deg)`;
+                section.style.backgroundColor = colors[index % colors.length];
+                
+                // Create a canvas for the section
+                const canvas = document.createElement('canvas');
+                canvas.width = 300;
+                canvas.height = 300;
+                const ctx = canvas.getContext('2d');
+                
+                // Draw the section
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.arc(0, 0, 300, 0, (sectionAngle * Math.PI / 180));
+                ctx.fillStyle = colors[index % colors.length];
+                ctx.fill();
+                
+                section.appendChild(canvas);
+                
+                // Add text
+                const text = document.createElement('div');
+                text.className = 'section-text';
+                text.textContent = option;
+                text.style.transform = `rotate(${sectionAngle / 2}deg) translateY(-120px) rotate(90deg)`;
+                
+                section.appendChild(text);
+                wheel.appendChild(section);
+                
+                sections.push({
+                    option,
+                    startAngle: angleStart,
+                    endAngle: angleEnd
+                });
+            });
+            
+            return true;
+        }
+        
+        function spinWheel() {
+            if (isSpinning) return;
+            
+            if (!updateWheel()) return;
+            
+            isSpinning = true;
+            spinButton.disabled = true;
+            tg.MainButton.hide();
+            resultDisplay.textContent = 'Spinning...';
+            
+            // Random number of spins (3-5 rotations)
+            const rotations = 3 + Math.random() * 2;
+            const degrees = rotations * 360;
+            
+            // Random stopping point
+            const stopDegrees = Math.floor(Math.random() * 360);
+            const totalDegrees = degrees + stopDegrees;
+            
+            wheel.style.transition = 'transform 5s cubic-bezier(0.1, 0.5, 0.1, 1)';
+            wheel.style.transform = `rotate(${-totalDegrees}deg)`;
+            
+            setTimeout(() => {
+                isSpinning = false;
+                spinButton.disabled = false;
+                
+                // Calculate which section the marker is pointing to
+                const normalizedDegrees = stopDegrees % 360;
+                const section = sections.find(s => 
+                    (normalizedDegrees >= s.startAngle && normalizedDegrees < s.endAngle) ||
+                    (s.startAngle <= normalizedDegrees + 360 && s.endAngle > normalizedDegrees + 360)
+                );
+                
+                if (section) {
+                    currentResult = section.option;
+                    resultDisplay.textContent = `The wheel selected: ${currentResult}`;
+                    
+                    // Show the main button only if we have a recipient
+                    if (selectedContact) {
+                        tg.MainButton.setText(`SEND "${currentResult}" TO RECIPIENT`);
+                        tg.MainButton.show();
+                        tg.MainButton.enable();
+                    } else {
+                        resultDisplay.textContent += '. Please select a recipient to send this result.';
+                    }
+                }
+            }, 5000);
+        }
+        
+        function sendToTelegram() {
+            if (!selectedContact) {
+                tg.showPopup({
+                    title: 'No Recipient Selected',
+                    message: 'Please select a recipient first',
+                    buttons: [{type: 'ok'}]
+                });
+                return;
+            }
+            
+            if (!currentResult) {
+                tg.showPopup({
+                    title: 'No Result',
+                    message: 'Please spin the wheel first',
+                    buttons: [{type: 'ok'}]
+                });
+                return;
+            }
+            
+            // Prepare the data to send back to the Telegram Bot
+            const data = {
+                result: currentResult,
+                recipient: selectedContact
+            };
+            
+            // Send the data back to the Telegram Bot
+            tg.sendData(JSON.stringify(data));
+            
+            // Show success message
+            tg.showPopup({
+                title: 'Success!',
+                message: `The result "${currentResult}" will be sent to the recipient.`,
+                buttons: [{type: 'ok'}]
+            }, function() {
+                // Close the WebApp after sending
+                tg.close();
+            });
+        }
+        
+        function addOption() {
+            const optionsList = document.getElementById('options-list');
+            const newOption = document.createElement('div');
+            newOption.className = 'option-input';
+            newOption.innerHTML = `
+                <input type="text" placeholder="Enter option">
+                <button onclick="removeOption(this)">X</button>
+            `;
+            optionsList.appendChild(newOption);
+        }
+
+        function removeOption(button) {
+            const optionsList = document.getElementById('options-list');
+            if (optionsList.children.length > 1) {
+                button.parentNode.remove();
+            } else {
+                tg.showPopup({
+                    message: 'You need at least one option!',
+                    buttons: [{type: 'ok'}]
+                });
+            }
+        }
+        
+        // Initial setup
+        updateWheel();
+        
+        // Event listeners
+        spinButton.addEventListener('click', spinWheel);
+        recipientDisplay.addEventListener('click', selectRecipient);
+        
+        function selectRecipient() {
+            // In a real implementation, this would use Telegram's native UI
+            // For simplicity, we're simulating with a prompt
+            const username = prompt("Enter recipient's username:", "");
+            if (username && username.trim() !== "") {
+                selectedContact = {
+                    user_id: Date.now(), // Using timestamp as mock ID
+                    username: username
+                };
+                recipientDisplay.textContent = `@${username}`;
+                
+                // If we already have a result, show the send button
+                if (currentResult) {
+                    tg.MainButton.setText(`SEND "${currentResult}" TO @${username}`);
+                    tg.MainButton.show();
+                }
+            }
+        }
+        
+        // Handle back button press
+        tg.BackButton.onClick(() => {
+            if (tg.MainButton.isVisible) {
+                tg.MainButton.hide();
+                return;
+            }
+            tg.close();
+        });
+        
+        // Handle haptic feedback for better user experience
+        spinButton.addEventListener('click', () => {
+            if (tg.HapticFeedback) {
+                tg.HapticFeedback.impactOccurred('medium');
+            }
+        });
+        
+        // React to theme changes
+        tg.onEvent('themeChanged', () => {
+            document.documentElement.className = 'theme-' + (tg.colorScheme || 'light');
+        });
+        
+        // Check if we're ready to enable the main button on load
+        window.addEventListener('load', () => {
+            if (selectedContact && currentResult) {
+                tg.MainButton.setText(`SEND "${currentResult}" TO RECIPIENT`);
+                tg.MainButton.show();
+            }
+        });
+        </script>
+    </body>
 </html>
