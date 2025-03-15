@@ -144,9 +144,9 @@ function sendResultToTelegram() {
             }));
             
             // Close the WebApp
-            setTimeout(() => {
-                window.Telegram.WebApp.close();
-            }, 1000);
+            // setTimeout(() => {
+            //     window.Telegram.WebApp.close();
+            // }, 1000);
         } else {
             // Fallback if Telegram WebApp is not available
             alert(`You won: ${currentResult.label}! This would be sent to the recipient in a real Telegram WebApp.`);
